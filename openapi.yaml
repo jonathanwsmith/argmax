@@ -1,0 +1,107 @@
+openapi: 3.0.1
+info:
+  title: Stack Overflow Object Detection API
+  description: API that fetches the top 10 users from the Stack Overflow Users API, reads their profile images, and uses an open-source object detection model to detect specified objects in those images.
+  version: 1.0.0
+servers:
+  - url: http://localhost:80/api/v1
+paths:
+  /users:
+    post:
+      summary: Get Top 10 Stack Overflow Users with Object Detection
+      description: Fetches the top 10 users from the Stack Overflow Users API and detects specified objects in their profile images.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: The object to detect in the user's profile images.
+                  example: "face"
+      responses:
+        '200':
+          description: A list of the top 10 Stack Overflow users with object detection results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    user_id:
+                      type: integer
+                      description: The ID of the user
+                      example: 1
+                    display_name:
+                      type: string
+                      description: The display name of the user
+                      example: User Name
+                    profile_image:
+                      type: string
+                      description: The URL of the user's profile image
+                      example: http://example.com/image.jpg
+                    object_detected:
+                      type: boolean
+                      description: Whether the specified object was detected in the profile image
+                      example: true
+                    bounding_boxes:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          x:
+                            type: integer
+                            description: The x-coordinate of the bounding box
+                            example: 100
+                          y:
+                            type: integer
+                            description: The y-coordinate of the bounding box
+                            example: 150
+                          width:
+                            type: integer
+                            description: The width of the bounding box
+                            example: 50
+                          height:
+                            type: integer
+                            description: The height of the bounding box
+                            example: 50
+                    detection_time_ms:
+                      type: number
+                      description: The time in milliseconds it took to detect the object
+                      example: 123.45
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+                    example: "Query parameter 'query' is required"
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+                    example: "Unsupported object type."
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+                    example: Internal Server Error

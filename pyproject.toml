@@ -1,0 +1,22 @@
+[project]
+name = "argmax"
+version = "0.0.1"
+description = "Argmax Interview - Technical Project"
+authors = [
+    {name = "Jonathan Smith", email = "jon@jonwsmith.dev"}
+]
+readme = "README.md"
+requires-python = ">=3.12,<4.0"
+dependencies = [
+    "requests (>=2.32.3,<3.0.0)",
+    "pillow (>=11.1.0,<12.0.0)",
+    "ultralytics (>=8.3.73,<9.0.0)",
+    "pydantic (>=2.10.6,<3.0.0)",
+    "fastapi[standard] (>=0.115.8,<0.116.0)",
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+

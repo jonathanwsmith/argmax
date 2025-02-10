@@ -17,7 +17,7 @@ class Detection:
 
     def __init__(self):
         self.session = Session()
-        self.model: Model = YOLO(model="yolo11s.pt")
+        self.model: Model = YOLO(model="yolo11n.pt")
 
     def _get_image(self, url: str) -> Image:
         """

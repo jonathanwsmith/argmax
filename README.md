@@ -29,4 +29,4 @@ can be accessed at http://localhost:8080/docs
 ## Next Steps
 - Look into FastAPI error handling to follow prescribed patterns better.
 - Look for a better library for managing object detection.  Ultralytics while easy to use has some rough edges that are gotcha points
-
+- Add api endpoint for user to check if the object they want to detect is supported.
